@@ -13,7 +13,10 @@
     -fx-background-radius: 0;
 }
 
+#label-grid{
+    -fx-font-family: "Segoe UI Light";
 
+}
 
 /*.reg {*/
 /*-fx-border-radius: 8;*/
@@ -47,8 +50,8 @@
     -fx-background-color: #3498db;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Light", Helvetica, Arial, sans-serif;
+    -fx-font-size: 24 px;
     -fx-text-fill: black;
 }
 
@@ -58,17 +61,10 @@
 
 .button:pressed, .button:default:hover:pressed
 {
-    -fx-background-color: black;
+    -fx-background-color: #6cb8ea;
     -fx-text-fill: white;
 }
 
-.button:focused
-{
-    -fx-border-color: black;
-    -fx-border-width: 1;
-    -fx-border-style: solid;/* segments(1, 1);*/
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
 
 .button:disabled, .button:default:disabled
 {
@@ -100,10 +96,10 @@
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
 
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Segoe UI Light", Helvetica, Arial, sans-serif;
 
-    -fx-font-size: 11pt;
-    -fx-text-fill: black;
+    -fx-font-size: 24 px;
+    -fx-text-fill: #6cb8ea;
 }
 
 .TitleButtons > .button:hover{
@@ -112,7 +108,7 @@
 
 .TitleButtons > .button:pressed, .TitleButtons > .button:default:hover:pressed
 {
-    -fx-background-color: black;
+    -fx-background-color: #6cb8ea;
     -fx-text-fill: white;
 }
 

@@ -20,9 +20,18 @@ public class SignUpController {
     @FXML
     private Pane movePane;
     @FXML
-    private TextField phoneNumber;
-    @FXML
     private TextField emailAddress;
+    @FXML
+    private TextField firstname;
+    @FXML
+    private TextField nickname;
+    @FXML
+    private TextField lastname;
+    @FXML
+    private TextField password;
+    @FXML
+    private TextField confirmPassword;
+
 
     @FXML
     private void initialize() {
@@ -53,14 +62,15 @@ public class SignUpController {
     }
 
     @FXML
-    private void validatePhoneNumber(){
-        if (!phoneNumber.getText().matches("^[0-9]{10}$")){
-            phoneNumber.setStyle("-fx-background-color: #F75D59");
+    private void validateConfirmPassword(){
+        if(password.getText().equals(confirmPassword.getText())){
+            confirmPassword.setStyle("-fx-background-color: #98FF98");
         }else{
-            phoneNumber.setStyle("-fx-background-color: #98FF98");
+            confirmPassword.setStyle("-fx-background-color: #F75D59");
         }
-
     }
+
+
 }
 
 
