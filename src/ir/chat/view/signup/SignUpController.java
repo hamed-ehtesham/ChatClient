@@ -1,13 +1,18 @@
 package ir.chat.view.signup;
 
 import ir.chat.Main;
+import ir.chat.RegisterRequest;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,37 +51,17 @@ public class SignUpController {
         Platform.exit();
     }
 
-    private void validateEmail() {
-        Pattern pattern;
-        Matcher matcher;
-        pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        matcher = pattern.matcher(emailAddress.getText());
-        if(!matcher.matches()){
-           // emailAddress.setText("ridi");
-            emailAddress.setStyle("-fx-background-color: #F75D59");
-        }else{
-            emailAddress.setStyle("-fx-background-color: #98FF98");
-        }
+    @FXML
+    private void RegisterButton_Clicked() {
+        vali
+        RegisterRequest request = new RegisterRequest("aminbajand@gmail.com", "i,d[", "amin", "bajand", "aminbag");
+        request.request();
     }
 
-    private void validateConfirmPassword(){
-        if(password.getText().equals(confirmPassword.getText())){
-            confirmPassword.setStyle("-fx-background-color: #98FF98");
-        }else{
-            confirmPassword.setStyle("-fx-background-color: #F75D59");
-        }
+    private void setControlStyle(Node node, Color color) {
+        String hex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+        node.setStyle("-fx-background-color: "+hex);
     }
-
-    private void validatePasswordStrengh(){
-        if(password.getText().equals(confirmPassword.getText())){
-            confirmPassword.setStyle("-fx-background-color: #98FF98");
-        }else{
-            confirmPassword.setStyle("-fx-background-color: #F75D59");
-        }
-    }
-
-
 }
 
 
