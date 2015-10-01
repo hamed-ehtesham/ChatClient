@@ -46,35 +46,11 @@ public class SignUpController {
         Platform.exit();
     }
 
-    private void validateEmail() {
-        Pattern pattern;
-        Matcher matcher;
-        pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        matcher = pattern.matcher(emailAddress.getText());
-        if(!matcher.matches()){
-           // emailAddress.setText("ridi");
-            emailAddress.setStyle("-fx-background-color: #F75D59");
-        }else{
-            emailAddress.setStyle("-fx-background-color: #98FF98");
-        }
-    }
 
-    private void validateConfirmPassword(){
-        if(password.getText().equals(confirmPassword.getText())){
-            confirmPassword.setStyle("-fx-background-color: #98FF98");
-        }else{
-            confirmPassword.setStyle("-fx-background-color: #F75D59");
-        }
-    }
 
-    private void validatePasswordStrengh(){
-        if(password.getText().equals(confirmPassword.getText())){
-            confirmPassword.setStyle("-fx-background-color: #98FF98");
-        }else{
-            confirmPassword.setStyle("-fx-background-color: #F75D59");
-        }
-    }
+
+
+
 
 
 }
