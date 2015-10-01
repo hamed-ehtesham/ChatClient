@@ -2,21 +2,16 @@
     -fx-background-image: url("../images/bg.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-font-family: "Calibri Light";
     -fx-font-size: 140%;
 }
 
 .text-field {
-    -fx-font-family: "Calibri Light";
     -fx-border-style: none;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
-#label-grid{
-    -fx-font-family: "Segoe UI Light";
 
-}
 
 /*.reg {*/
 /*-fx-border-radius: 8;*/
@@ -50,7 +45,7 @@
     -fx-background-color: #3498db;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
-    -fx-font-family: "Segoe UI Light", Helvetica, Arial, sans-serif;
+    -fx-font-family:sans-serif , Arial;
     -fx-font-size: 24 px;
     -fx-text-fill: black;
 }

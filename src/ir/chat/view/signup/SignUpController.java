@@ -46,7 +46,6 @@ public class SignUpController {
         Platform.exit();
     }
 
-    @FXML
     private void validateEmail() {
         Pattern pattern;
         Matcher matcher;
@@ -61,8 +60,15 @@ public class SignUpController {
         }
     }
 
-    @FXML
     private void validateConfirmPassword(){
+        if(password.getText().equals(confirmPassword.getText())){
+            confirmPassword.setStyle("-fx-background-color: #98FF98");
+        }else{
+            confirmPassword.setStyle("-fx-background-color: #F75D59");
+        }
+    }
+
+    private void validatePasswordStrengh(){
         if(password.getText().equals(confirmPassword.getText())){
             confirmPassword.setStyle("-fx-background-color: #98FF98");
         }else{

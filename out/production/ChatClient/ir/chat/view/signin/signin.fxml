@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="anpn" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="853.0" prefWidth="640.0" styleClass="anchorPane" stylesheets="@signin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.chat.view.signin.SignInController">
+<AnchorPane id="anpn" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="anchorPane" stylesheets="@signin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ir.chat.view.signin.SignInController">
    <children>
-      <Label layoutX="126.0" layoutY="35.0" prefHeight="50.0" prefWidth="391.0" text="Welcome to Telepaty " textFill="#1fb3cf" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="123.0">
+      <Label layoutX="149.0" layoutY="37.0" prefHeight="50.0" prefWidth="153.0" text="Telepaty" textFill="#1fb3cf" AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="148.0">
          <font>
             <Font name="Calibri Light" size="44.0" />
          </font>
@@ -17,15 +17,15 @@
          <children>
             <Pane layoutX="352.0" layoutY="12.0" styleClass="TitleButtons">
                <children>
-                  <Button id="closeButton" fx:id="closeButton" cancelButton="true" layoutX="240.0" maxHeight="30.0" maxWidth="34.0" minHeight="30.0" minWidth="34.0" mnemonicParsing="false" onAction="#CloseButton_Clicked" prefHeight="30.0" prefWidth="34.0" />
+                  <Button id="closeButton" fx:id="closeButton" cancelButton="true" layoutX="56.0" layoutY="-1.0" maxHeight="30.0" maxWidth="34.0" minHeight="30.0" minWidth="34.0" mnemonicParsing="false" onAction="#CloseButton_Clicked" prefHeight="30.0" prefWidth="34.0" />
                </children>
             </Pane>
          </children>
       </AnchorPane>
-      <Button defaultButton="true" layoutX="42.0" layoutY="693.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="302.0" text="Register" textFill="#6cb8ea" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="38.0" />
-      <Label layoutX="22.0" layoutY="111.0" text="Personal Information" textFill="#436068" AnchorPane.leftAnchor="10.0">
+      <Button defaultButton="true" layoutX="40.0" layoutY="454.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="302.0" text="Login" textFill="#6cb8ea" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
+      <Label layoutX="22.0" layoutY="111.0" text="Login" textFill="#436068" AnchorPane.leftAnchor="10.0">
          <font>
-            <Font name="Segoe UI Light" size="24.0" />
+            <Font name="Segoe UI Light" size="31.0" />
          </font>
       </Label>
       <GridPane hgap="10.0" layoutX="20.0" layoutY="188.0" vgap="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
@@ -36,63 +36,22 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-            <Label />
-            <Label text="Nickname" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Segoe UI Light" size="23.0" />
-               </font>
-            </Label>
-            <Label id="label-grid" text="Last Name" GridPane.rowIndex="2" />
-            <Label text="First Name">
-               <font>
-                  <Font name="Segoe UI Light" size="23.0" />
-               </font>
-            </Label>
-            <TextField fx:id="firstname" GridPane.columnIndex="1" />
-            <TextField fx:id="nickname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="lastname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-      <GridPane hgap="10.0" layoutX="20.0" layoutY="459.0" vgap="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
             <Label />
             <Label text="Password" GridPane.rowIndex="1">
                <font>
-                  <Font name="Segoe UI Light" size="23.0" />
+                  <Font name="Segoe UI Light" size="20.0" />
                </font>
             </Label>
-            <Label id="label-grid" text="Confirm Password" GridPane.rowIndex="2" />
             <Label text="Email">
                <font>
-                  <Font name="Segoe UI Light" size="23.0" />
+                  <Font name="Segoe UI Light" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="emailAddress" onKeyReleased="#validateEmail" GridPane.columnIndex="1" />
+            <TextField fx:id="emailAddress" GridPane.columnIndex="1" />
             <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField fx:id="confirmPassword" onKeyReleased="#validateConfirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="191.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="404.0" minWidth="10.0" prefWidth="379.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
       </GridPane>
-      <Label layoutX="22.0" layoutY="392.0" text="Register Information" textFill="#436068" AnchorPane.leftAnchor="10.0">
-         <font>
-            <Font name="Segoe UI Light" size="24.0" />
-         </font>
-      </Label>
-      <Hyperlink layoutX="10.0" layoutY="805.0" text="Privacy Policy &amp; Terms">
-         <font>
-            <Font name="Calibri Light" size="21.0" />
-         </font>
-      </Hyperlink>
    </children>
 </AnchorPane>
