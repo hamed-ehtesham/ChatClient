@@ -1,13 +1,13 @@
 package ir.chat;
 
 import ir.chat.model.ConnectionSteps;
-import ir.chat.util.AESEncryptionUtil;
 import ir.chat.util.ChannelHelper;
 import ir.chat.util.RSAEncryptionUtil;
 import ir.chat.util.XMLUtil;
+import ir.chat.view.IdentificationInfo;
 import ir.chat.view.KeyInfo;
-import ir.chat.view.RegistrationRequestInfo;
-import ir.chat.view.RespondInfo;
+import ir.chat.view.LoginRequestInfo;
+import ir.chat.view.LoginRespondInfo;
 
 import javax.crypto.SealedObject;
 import java.io.IOException;
@@ -16,22 +16,16 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 /**
- * Created by Hamed on 9/19/2015.
+ * Created by Mohammad Amin on 23/09/2015.
  */
-public class RegisterRequest {
+public class LoginRequest {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
-    private String nickname;
-    private RespondInfo respond;
+    private LoginRespondInfo respond;
 
-    public RegisterRequest(String email, String password, String firstName, String lastName, String nickname) {
+    public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nickname = nickname;
     }
 
     public String getEmail() {
@@ -50,40 +44,16 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public RespondInfo getRespond() {
+    public LoginRespondInfo getRespond() {
         return respond;
     }
 
-    public void setRespond(RespondInfo respond) {
+    public void setRespond(LoginRespondInfo respond) {
         this.respond = respond;
     }
 
     public static void main(String[] args) {
-        RegisterRequest request = new RegisterRequest("aminbajand@gmail.com", "i,d[", "amin", "bajand", "aminbag");
+        LoginRequest request = new LoginRequest("ali_jaf@gmail.com", "i,d[");
         request.request();
     }
 
@@ -104,31 +74,30 @@ public class RegisterRequest {
 
             //Prepare key for receive server's public key from server
             SelectionKey readKey = channel.register(selector, SelectionKey.OP_READ);
-            readKey.attach(ConnectionSteps.Registration.PUBLIC_KEY);
+            readKey.attach(ConnectionSteps.Login.PUBLIC_KEY);
         }
 
         @Override
         protected void read(SelectionKey key) throws IOException {
             byte[] data = ChannelHelper.read(key);
-            switch ((ConnectionSteps.Registration) key.attachment()) {
+            switch ((ConnectionSteps.Login) key.attachment()) {
                 case PUBLIC_KEY: {
                     KeyInfo keyInfo = XMLUtil.unmarshal(KeyInfo.class, data);
                     System.out.println(keyInfo);
                     encryptSymmetricKey(keyInfo);
                     key.interestOps(SelectionKey.OP_WRITE);
-                    key.attach(ConnectionSteps.Registration.SYMMETRIC_KEY);
+                    key.attach(ConnectionSteps.Login.SYMMETRIC_KEY);
                     break;
                 }
-                case REG_RESPOND: {
-                    RespondInfo respondInfo = XMLUtil.unmarshal(RespondInfo.class, data);
+                case LOGIN_RESPOND: {
+                    LoginRespondInfo respondInfo = XMLUtil.unmarshal(LoginRespondInfo.class, data);
                     setRespond(respondInfo);
                     System.out.println(respondInfo);
-                    if(respondInfo.getSucceed())
-                    {
-                        AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil(symmetricKey);
-                        System.out.println(getPassword());
-//                        requestInfo.setPassword(aesEncryptionUtil.decrypt(requestInfo.getPassword()));
-                        LoginRequest request = new LoginRequest(getEmail(), getPassword());
+                    if(respondInfo.getSucceed()) {
+                        IdentificationInfo identificationInfo = new IdentificationInfo();
+                        identificationInfo.setSessionID(respondInfo.getSessionID());
+                        identificationInfo.setEmail(getEmail());
+                        MessageSyncRequest request = new MessageSyncRequest(identificationInfo,symmetricKey, 1000);
                         request.request();
                     }
                     key.cancel();
@@ -142,28 +111,26 @@ public class RegisterRequest {
         protected void write(SelectionKey key) throws IOException {
             SocketChannel channel = (SocketChannel) key.channel();
 
-            switch ((ConnectionSteps.Registration) key.attachment()) {
+            switch ((ConnectionSteps.Login) key.attachment()) {
                 case SYMMETRIC_KEY: {
                     if (sealedObject != null) {
                         ChannelHelper.writeObject(channel, sealedObject);
-                        key.attach(ConnectionSteps.Registration.REG_INFO);
+                        key.attach(ConnectionSteps.Login.LOGIN_INFO);
                     }
+
                     break;
                 }
-                case REG_INFO: {
-                    RegistrationRequestInfo requestInfo = new RegistrationRequestInfo();
+                case LOGIN_INFO: {
+                    LoginRequestInfo requestInfo = new LoginRequestInfo();
                     requestInfo.setEmail(getEmail());
                     requestInfo.setPassword(getPassword());
-                    requestInfo.setFirstName(getFirstName());
-                    requestInfo.setLastName(getLastName());
-                    requestInfo.setNickname(getNickname());
 
                     ByteBuffer buffer = XMLUtil.marshal(requestInfo);
-                    buffer = ChannelHelper.encrypt(buffer, symmetricKey);
+                    buffer = ChannelHelper.encrypt(buffer,symmetricKey);
                     channel.write(buffer);
 //                    System.out.println(new String(buffer.array()));
                     key.interestOps(SelectionKey.OP_READ);
-                    key.attach(ConnectionSteps.Registration.REG_RESPOND);
+                    key.attach(ConnectionSteps.Login.LOGIN_RESPOND);
 
                     break;
                 }
@@ -180,7 +147,7 @@ public class RegisterRequest {
     }
 
     public void request() {
-        Thread thread = new Thread(new request("localhost", 8511));
+        Thread thread = new Thread(new request("localhost", 8513));
         thread.start();
     }
 }

@@ -1,7 +1,6 @@
 package ir.chat;
 
 import ir.chat.util.Undecorator;
-import ir.chat.view.ClientController;
 import ir.chat.view.signin.SignInController;
 import ir.chat.view.signup.SignUpController;
 import javafx.application.Application;
